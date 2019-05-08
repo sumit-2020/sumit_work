@@ -1,0 +1,55 @@
+\begin{thebibliography}{10}
+
+\bibitem{lattice}
+D.-K. Electronics, ``Portfolio of lattice's miniature family of fpgas.''
+\newblock Available at
+  \url{https://www.digikey.in/en/product-highlight/l/lattice/fpga-portfolio}.
+
+\bibitem{jonathan_rose}
+J.~Rose, ``Fpga architecture research.''
+\newblock Available at
+  \url{http://www.eecg.toronto.edu/~jayar/research/architecture.html}.
+
+\bibitem{1410611}
+H.~Gao, Y.~Yang, X.~Ma, and G.~Dong, ``Analysis of the effect of lut size on
+  fpga area and delay using theoretical derivations,'' in {\em Sixth
+  international symposium on quality electronic design (isqed'05)},
+  pp.~370--374, March 2005.
+
+\bibitem{vtr}
+``Verilog to routing.''
+\newblock Available at \url{https://verilogtorouting.org/}.
+
+\bibitem{777267}
+V.~{Betz} and J.~{Rose}, ``Circuit design, transistor sizing and wire layout of
+  fpga interconnect,'' in {\em Proceedings of the IEEE 1999 Custom Integrated
+  Circuits Conference (Cat. No.99CH36327)}, pp.~171--174, May 1999.
+
+\bibitem{1671752}
+B.~S. {Landman} and R.~L. {Russo}, ``On a pin versus block relationship for
+  partitions of logic graphs,'' {\em IEEE Transactions on Computers},
+  vol.~C-20, pp.~1469--1479, Dec 1971.
+
+\bibitem{1600242}
+P.~K. {Chan}, M.~D.~F. {Schlag}, and J.~Y. {Zien}, ``On routability prediction
+  for field-programmable gate arrays,'' in {\em 30th ACM/IEEE Design Automation
+  Conference}, pp.~326--330, June 1993.
+
+\bibitem{thesis}
+M.~I. Masud, ``Fpga routing structures: A novel switch block and depopulated
+  interconnect matrix architectures.''
+\newblock Available at
+  \url{http://www.ece.ubc.ca/~stevew/papers/pdf/imran_masc.pdf}.
+
+\bibitem{518235}
+D.~{Tavana}, W.~{Yee}, S.~{Young}, and B.~{Fawcett}, ``Logic block and routing
+  considerations for a new sram-based fpga architecture,'' in {\em Proceedings
+  of the IEEE 1995 Custom Integrated Circuits Conference}, pp.~511--514, May
+  1995.
+
+\bibitem{xilinx}
+Xilinx, ``Datasheet of xilinx 2064.''
+\newblock Available at
+  \url{https://www.datasheetspdf.com/pdf/625540/Xilinx/XC2064/1}.
+
+\end{thebibliography}

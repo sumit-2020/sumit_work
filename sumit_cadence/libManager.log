@@ -1,0 +1,27 @@
+\o Program:		@(#)$CDS: libManager version 6.1.7 - CAT35 10/18/2015 00:06 (sjfnl678) $
+\o Sub version:		sub-version  p009 
+\o Arguments:		-unmapped -mpssession virtuoso30185 -mpshost vlsi 
+\o Working Directory:	vlsi:/home/smdp/Desktop/sumit_work/sumit_cadence
+\o 64-bit offsets
+\o Qt version: 		4.8.5
+\o changeWorkingDir("/home/smdp/Desktop/sumit_work/sumit_cadence") unnecessary.
+\o ddSetForcedLib("") unnecessary.
+\o Log file is "/home/smdp/Desktop/sumit_work/sumit_cadence/libManager.log".
+\o Opening libManager window.
+\a nrSetWindowVisibility(cdsLibManager "show")
+\o MPS service: map window
+\a nrSetCurrentWindow(cdsLibManager)
+\o Library Manager customization server connected.
+\w Warning: '/home/smdp/Desktop/sumit_work/sumit_cadence/cds.lib', Line 1: Skipping: 'ï'
+\o   »  ¿SOFTINCLUDE  /home/user/cadence/IC617/share/cdssetup/cds.lib 
+\w Warning: The directory: '/home/smdp/Desktop/jaskirat/Test' does not exist
+\w 	but was defined in libFile '/home/smdp/Desktop/sumit_work/sumit_cadence/cds.lib' for Lib 'Test'.
+\a nrResizeWindow(cdsLibManager list(590 186 600 443))
+\a cdsLibManager->libListBox->value = "sumitfpga"
+\a cdsLibManager->libLineEdit->value = "sumitfpga"
+\a _lmgrCloseIconify("cdsLibManager" 1)
+\a nrSetCurrentWindow(cdsLibManager)
+\a cdsLibManager->fileExitButton->value = t
+\o libManager is exiting.
+\a nrSetWindowVisibility(cdsLibManager "hide")
+\a exit(0)

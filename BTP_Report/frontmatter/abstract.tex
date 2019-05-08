@@ -1,0 +1,21 @@
+%
+% File: abstract.tex
+% Author: V?ctor Bre?a-Medina
+% Description: Contains the text for thesis abstract
+%
+% UoB guidelines:
+%
+% Each copy must include an abstract or summary of the dissertation in not
+% more than 300 words, on one side of A4, which should be single-spaced in a
+% font size in the range 10 to 12. If the dissertation is in a language other
+% than English, an abstract in that language and an abstract in English must
+% be included.
+
+\chapter*{Abstract}
+%\begin{SingleSpace}
+\begin{OnehalfSpacing}
+\paragraph{}
+\end{OnehalfSpacing}
+Minimal FPGAs have huge promise for implementing small interfacing and other logic designs at cheap costs. The minimal FPGAs available in the market are still too big for certain applications and thus we try to solve this problem. We developed the flow for designing a minimal Island-Style FPGA using VTR[3] experimentation and Cadence Schematic level simulations. We first develop models for area and delay of a CLB and choose suitable a LUT size. After that, we experiment with different switch matrix configurations and routing widths to settle for the optimum. The I/O block for the FPGA is then designed in Cadence Schematic L and tested for functionality. SKILL language is used to automatically generate decoder schematics. Smaller modules are used to create the top level schematic of the FPGA. A flow is created to program the bitstream using stimulus files and some scripts. The FPGA is tested for functionality and the delay path is then analyzed. The breakdown of the delay is provided for reference. All the simulations and tests were performed in Cadence ADE L using spectre at room temperature. SCL $180nm$ PDK was used in tt18 configuration with minimal sizing unless explicitly stated. The thesis ends by concluding the results and discussing future directions.
+
+\clearpage 

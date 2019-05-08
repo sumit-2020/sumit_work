@@ -1,0 +1,76 @@
+********************************************************************************
+Product   : Virtuoso(R) XStream Out
+Program   : @(#)$CDS: strmout version 6.1.7-64b 11/09/2015 12:41 (sjfbm191) $
+          : sub-version  IC6.1.7-64b.78 
+Started at: 15-Feb-2019  18:05:30
+User Name : smdp
+Host Name : vlsi
+Directory : /home/smdp/Desktop/sumit_cadence
+CADENCE Design Systems, Inc.
+********************************************************************************
+Info: Cellview Rev Num:99,  Tech Rev Num:59
+
+
+                       Individual Cell Statistics - Basic Objects
+---------------------------------------------------------------------------------------------------------------------------------------
+Library/Cell/View               Instance Array   Polygon  Rect   Path   PathSeg   Text   TextDisplay   Line   Dot   Arc   Donut   Ellipse 
+---------------------------------------------------------------------------------------------------------------------------------------
+ts018_scl_prim/nmos_18/layout   0        0       0        15     0      0         1      0             0      0     0     0       0       
+ts018_scl_prim/M1_PO/layout     0        0       0        3      0      0         0      0             0      0     0     0       0       
+sumitfpga/inv/layout            2        0       0        8      0      0         4      0             0      0     0     0       0       
+ts018_scl_prim/pmos_18/layout   0        0       0        20     0      0         1      0             0      0     0     0       0       
+---------------------------------------------------------------------------------------------------------------------------------------
+
+                       Individual Cell Statistics - Advanced Objects
+---------------------------------------------------------------------------------------------------------------------------------------
+Library/Cell/View               PRBdy    OtherBdy   AreaBlkg   LayerBlkg  AreaHalo   Row   Marker   CustVia   StdVia    CdsGenVia
+---------------------------------------------------------------------------------------------------------------------------------------
+ts018_scl_prim/nmos_18/layout   0        0          0          0          0          0     0        0         0         0        
+ts018_scl_prim/M1_PO/layout     0        0          0          0          0          0     0        0         0         0        
+sumitfpga/inv/layout            0        0          0          0          0          0     0        0         10        0        
+ts018_scl_prim/pmos_18/layout   0        0          0          0          0          0     0        0         0         0        
+---------------------------------------------------------------------------------------------------------------------------------------
+
+                       Statistics of Layers 
+---------------------------------------------------------------------------------------------------------------------------------------
+Cadence         Cadence         Stream  Stream   
+Layer           Purpose         Layer   Datatype  Polygon  Rect     Path     Text     TextDisplay   Line Dot Arc Donut Ellipse Pathseg
+---------------------------------------------------------------------------------------------------------------------------------------
+XN              drawing         32      0         0        1        0        0        0             0    0   0   0     0      0      
+text            drawing         77      7         0        0        0        2        0             0    0   0   0     0      0      
+GC              drawing         8       0         0        17       0        0        0             0    0   0   0     0      0      
+ACTIVE          drawing         9       0         0        6        0        0        0             0    0   0   0     0      0      
+WN              drawing         3       0         0        1        0        0        0             0    0   0   0     0      0      
+M1              drawing         40      0         0        7        0        4        0             0    0   0   0     0      0      
+XP              drawing         31      0         0        1        0        0        0             0    0   0   0     0      0      
+CS              drawing         34      0         0        13       0        0        0             0    0   0   0     0      0      
+---------------------------------------------------------------------------------------------------------------------------------------
+
+Summary of Objects Translated:
+	Scalar Instances:		2
+	Array Instances:		0
+	Polygons:			0
+	Paths:				0
+	Rectangles:			46
+	Lines:				0
+	Arcs:				0
+	Donuts:				0
+	Dots:				0
+	Ellipses:			0
+	Boundaries:			0
+	Area Blockages:			0
+	Layer Blockages:		0
+	Area Halos:			0
+	Markers:			0
+	Rows:				0
+	Standard Vias:			10
+	Custom Vias:			0
+	CdsGen Vias:			0
+	Pathsegs:			0
+	Text:				6
+	TextDisplay:		0
+	Cells:				4
+Design Libraries: 
+
+DEFINE ts018_scl_prim	/home/user/PDKfiles/scl_pdk/design_kit/pdklib/cadence/OA/ts018_compana_4M1L_OA/rev0.0/ref_libs/ts018_scl_prim
+DEFINE sumitfpga	/home/smdp/Desktop/sumit_cadence/sumitfpga

@@ -1,0 +1,59 @@
+######################### Cadence Installation
+setenv CDS_Netlisting_Mode "Analog"
+setenv CDS_LIC_FILE 5280@vlsi120.vlsilab.net:5280@vlsi23.vlsilab.net
+#setenv CDS_LIC_FILE $LM_LICENSE_FILE
+unsetenv MMSIMHOME
+setenv LANG en_US
+setenv CDS_INST_DIR /home/user/cadence/IC617
+#setenv CDS_INST_DIR /home/smdp4/cadence6.1.7/installs/IC617
+#setenv CDS_INST_DIR /home/user/cadence/IC616
+#setenv CDS_INST_DIR /home/user/cadence/IC616ISR11_lnx86
+setenv QRC_HOME /home/user/cadence/EXT151
+setenv EXTHOME /home/user/cadence/EXT151
+setenv QRC_ENABLE_EXTRACTION "t"
+setenv PVSHOME /home/user/cadence/PVS15.1_lnx86
+setenv MMSIMHOME /home/user/cadence/MMSIM151
+setenv ASSURAHOME /home/user/cadence/lnx86
+setenv ETHOME /home/user/cadence/ET151/lnx86
+#setenv IUSHOME /cadence_tools/INCISIVE142/grid/avs/install/incisive/14.2/latest
+#setenv RCHOME /cadence_tools/RC142/icd/rc/rc14/stream/RC14.20/install/RC14.20/14.20-s027_1
+#setenv ENCOUNTERHOME /cadence_tools/EDI142/EDI142Base_lnx86
+
+#setenv OA_HOME /cadence_tools/EDI142/EDI142Base_lnx86/oa_v22.50.007
+#setenv MVSHOME /cadence_tools/MVS151/lnx86
+#setenv PACIFICHOME /cadence_tools/PACIFIC61/PACIFIC61USR4
+#setenv ANLSHOME /cadence_tools/ANLS62/ANLS62ISR2_lnx86
+#setenv SPBHOME /cadence_tools/SPB166/SPB166_lnx86
+#setenv CDS_INS_DIR $CDS_INST_DIR
+#setenv AMSHOME $IUSHOME
+setenv LD_LIBRARY_PATH $CDS_INST_DIR/tools/lib:$CDS_INST_DIR/tools/dfII/lib
+#setenv LD_LIBRARY_PATH $IUSHOME/tools/lib
+setenv CDS_AUTO_64BIT ALL
+setenv CDSHOME $CDS_INST_DIR
+set path = ($MMSIMHOME/tools/bin $MMSIMHOME/tools/dfII/bin $CDS_INST_DIR/bin $CDS_INST_DIR/tools/bin $CDS_INST_DIR/tools/dfII/bin $CDS_INST_DIR/share/bin $CDS_INST_DIR/tools.lnx86/bin $CDS_INST_DIR/tools.lnx86/dfII/bin $PVSHOME/tools/assura/bin $PVSHOME/tools/bin $PVSHOME/tools/dfII/bin $EXTHOME/bin $EXTHOME/dfII/bin $ASSURAHOME/bin $ASSURAHOME/tools/bin $ASSURAHOME/tools/dfII/bin $ASSURAHOME/tools.lnx86/dfII/bin $ASSURAHOME/tools.lnx86/bin $ASSURAHOME/share/bin $ETHOME/bin $ETHOME/tools/bin $ETHOME/tools/dfII/bin $ETHOME/share/bin $ETHOME/bin $ETHOME/tools/bin $ETHOME/tools/dfII/bin $ETHOME/share/bin $path)
+
+######################### Hspice Installation
+
+setenv LM_LICENSE_FILE 27000@vlsi23.vlsilab.net:27000@vlsi120.vlsilab.net
+setenv MGCLD_LICENSE_FILE 27000@vlsi23.vlsilab.net:27000@vlsi120.vlsilab.net
+setenv SNPSLMD_LICENSE_FILE 27000@vlsi23.vlsilab.net:27000@vlsi120.vlsilab.net
+setenv CDS_LOAD_ENV CSF
+set path=(/home/user/synopsys/HSPICE/hspice/linux64 $path)
+set path=(/home/user/synopsys/cwaveview/bin $path)
+set path=(/home/user/synopsys/cosmoscope/bin $path)
+
+################# Calibre installation
+
+setenv MGLS_LICENSE_FILE 1717@vlsi23.vlsilab.net
+setenv MGC_HOME /home/user/mentorgraphics/calibre/aoi_cal_2016.1_14.11
+set path=($MGC_HOME/bin $path) 
+
+echo "##########################################"
+echo "Welcome to Cadence EDA Tools"
+echo "For Synopsys HSPICE Integration Run"
+echo "source /home/user/synopsys/HSPICE/hspice/bin/cshrc.meta"
+echo "Then Run virtuoso"
+echo "##########################################"
+alias pdf acroread
+alias c clear
+

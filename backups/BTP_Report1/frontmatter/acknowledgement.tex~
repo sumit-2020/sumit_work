@@ -1,0 +1,21 @@
+%
+% file: dedication.tex
+% author: V?ctor Bre?a-Medina
+% description: Contains the text for thesis dedication
+%
+
+\chapter*{Acknowledgements}
+\begin{OnehalfSpacing}
+%\begin{center}
+%\begin{minipage}{14.7 cm}
+\initial I sincerely thank my B.Tech. Project advisor \textbf{Dr. Anand Bulusu} for his constant guidance and support throughout the project. 
+
+I would like to acknowledge the contribution of \textbf{Mr. Jaskirat Singh} \& \textbf{Mr. Sanjay Yadav}, B. Tech students in ECE, IIT Roorkee for helping out with the necessary layouts and the ideation of the architecture. I am sincerely thankful to \textbf{Mr. Inder Choudhary}, research scholar in Microelectronics \& VLSI, Department of ECE, IIT Roorkee for his ideas and motivation. I also thank all the research scholars and project staff of SMDP Lab, Department of ECE for helpful technical discussions at every stage of the project. I thank \textbf{Department of Electronics and Communication Engineering, IIT Roorkee} for providing the lab and other resources required for carrying out my project work. 
+
+Overall, working on this project has been a knowledgeable experience and provided me with a great experience in the area of FPGAs \& Computer Architecture. 
+
+
+%\end{minipage}
+%\end{center}
+\end{OnehalfSpacing}
+\clearpage

@@ -1,0 +1,14 @@
+sumit_all_left.xml        adder.v                            4     6 x 6
+sumit_spread.xml          adder.v                            4     6 x 6
+sumit_all_left.xml        multiplier.v                       8     10 x 10
+sumit_spread.xml          multiplier.v                       6     10 x 10
+sumit_all_left.xml        and_latch.v                        2     3 x 3
+sumit_spread.xml          and_latch.v                        2     3 x 3
+sumit_all_left.xml        ch_intrinsics.v                    6     60 x 60
+sumit_spread.xml          ch_intrinsics.v                    4     60 x 60
+sumit_all_left.xml        multiclock_separate_and_latch.v    4     4 x 4
+sumit_spread.xml          multiclock_separate_and_latch.v    2     4 x 4
+sumit_all_left.xml        multiclock_output_and_latch.v      4     4 x 4
+sumit_spread.xml          multiclock_output_and_latch.v      2     4 x 4
+sumit_all_left.xml        multiclock_reader_writer.v         6     6 x 6
+sumit_spread.xml          multiclock_reader_writer.v         4     6 x 6

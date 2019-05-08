@@ -1,0 +1,56 @@
+\babel@toc {english}{}
+\par \penalty \@M \textbf {{\scshape Figure} \hfill Page}\par \penalty \@M 
+\addvspace {10pt}
+\contentsline {figure}{\numberline {11}{\ignorespaces Small FPGA hubs in smart-home solutions\relax }}{1}{figure.caption.7}
+\contentsline {figure}{\numberline {12}{\ignorespaces Lattice's family of miniature FPGAs[1]\relax }}{2}{figure.caption.8}
+\contentsline {figure}{\numberline {13}{\ignorespaces Island-Style FPGA architecture\relax }}{2}{figure.caption.9}
+\contentsline {figure}{\numberline {14}{\ignorespaces Area model used in [3]\relax }}{3}{figure.caption.11}
+\contentsline {figure}{\numberline {15}{\ignorespaces Sizing pass transistors of the switch matrices[5]\relax }}{4}{figure.caption.12}
+\addvspace {10pt}
+\contentsline {figure}{\numberline {21}{\ignorespaces CLB Architecture Wireframe\relax }}{7}{figure.caption.17}
+\contentsline {figure}{\numberline {22}{\ignorespaces Area model\relax }}{8}{figure.caption.18}
+\contentsline {figure}{\numberline {23}{\ignorespaces Layouts for area estimates\relax }}{9}{figure.caption.19}
+\contentsline {figure}{\numberline {24}{\ignorespaces Area estimates in $um^2$ for different values of k\relax }}{9}{figure.caption.20}
+\contentsline {figure}{\numberline {25}{\ignorespaces Tradeoff in different k values\relax }}{10}{figure.caption.21}
+\contentsline {figure}{\numberline {26}{\ignorespaces $t_K$ vs k for different values of $\mu $\relax }}{11}{figure.caption.23}
+\contentsline {figure}{\numberline {27}{\ignorespaces 2-to-1 MUX\relax }}{12}{figure.caption.25}
+\contentsline {figure}{\numberline {28}{\ignorespaces 4-to-1 MUX\relax }}{12}{figure.caption.26}
+\contentsline {figure}{\numberline {29}{\ignorespaces D Flip-Flop\relax }}{13}{figure.caption.27}
+\contentsline {figure}{\numberline {210}{\ignorespaces SRAM cell\relax }}{13}{figure.caption.28}
+\contentsline {figure}{\numberline {211}{\ignorespaces 4 X 4 SRAM array\relax }}{14}{figure.caption.29}
+\contentsline {figure}{\numberline {212}{\ignorespaces 4 X 1 Crossbar\relax }}{14}{figure.caption.30}
+\contentsline {figure}{\numberline {213}{\ignorespaces 4 X 4 Crossbar\relax }}{15}{figure.caption.31}
+\contentsline {figure}{\numberline {214}{\ignorespaces CLB Schematic\relax }}{17}{figure.caption.32}
+\addvspace {10pt}
+\contentsline {figure}{\numberline {31}{\ignorespaces Different types of switch matrices\relax }}{19}{figure.caption.38}
+\contentsline {figure}{\numberline {32}{\ignorespaces Routing possibilities with Wilton design\relax }}{19}{figure.caption.39}
+\contentsline {figure}{\numberline {33}{\ignorespaces Routing possibilities with Disjoint design\relax }}{20}{figure.caption.40}
+\contentsline {figure}{\numberline {34}{\ignorespaces CLB pinout: all inputs on left side\relax }}{21}{figure.caption.43}
+\contentsline {figure}{\numberline {35}{\ignorespaces Routing of a 5-bit adder needs W=6\relax }}{21}{figure.caption.44}
+\contentsline {figure}{\numberline {36}{\ignorespaces Routing congestion\relax }}{22}{figure.caption.45}
+\contentsline {figure}{\numberline {37}{\ignorespaces CLB pinout: one input from each side\relax }}{22}{figure.caption.46}
+\contentsline {figure}{\numberline {38}{\ignorespaces Routing of a 5-bit adder needs W=2\relax }}{23}{figure.caption.47}
+\contentsline {figure}{\numberline {39}{\ignorespaces Routing congestion\relax }}{23}{figure.caption.48}
+\contentsline {figure}{\numberline {310}{\ignorespaces CLB pinout and switch matrix closeup\relax }}{24}{figure.caption.50}
+\contentsline {figure}{\numberline {311}{\ignorespaces Routing of a 10-bit adder needs W=4\relax }}{25}{figure.caption.51}
+\contentsline {figure}{\numberline {312}{\ignorespaces Routing congestion\relax }}{25}{figure.caption.52}
+\contentsline {figure}{\numberline {313}{\ignorespaces Routing the memory controller needs W=4\relax }}{26}{figure.caption.53}
+\contentsline {figure}{\numberline {314}{\ignorespaces Routing congestion\relax }}{26}{figure.caption.54}
+\contentsline {figure}{\numberline {315}{\ignorespaces Required grid sizes and routing widths for different verilog designs\relax }}{27}{figure.caption.55}
+\contentsline {figure}{\numberline {316}{\ignorespaces 8x8 FPGA structure as seen in VTR\relax }}{27}{figure.caption.57}
+\contentsline {figure}{\numberline {317}{\ignorespaces 8x8 FPGA structure as seen in VTR\relax }}{28}{figure.caption.58}
+\contentsline {figure}{\numberline {318}{\ignorespaces 8x8 FPGA structure as seen in VTR\relax }}{29}{figure.caption.59}
+\addvspace {10pt}
+\contentsline {figure}{\numberline {41}{\ignorespaces Wireframe of the I/O Block\relax }}{31}{figure.caption.63}
+\contentsline {figure}{\numberline {42}{\ignorespaces XML description of the I/O Block\relax }}{32}{figure.caption.65}
+\contentsline {figure}{\numberline {43}{\ignorespaces I/O Block schematic\relax }}{33}{figure.caption.67}
+\addvspace {10pt}
+\contentsline {figure}{\numberline {51}{\ignorespaces 6-T SRAM cell\relax }}{35}{figure.caption.72}
+\contentsline {figure}{\numberline {52}{\ignorespaces 6-T cell parasitic flip recovery\relax }}{36}{figure.caption.73}
+\contentsline {figure}{\numberline {53}{\ignorespaces Schematics of row and column decoder\relax }}{37}{figure.caption.76}
+\addvspace {10pt}
+\contentsline {figure}{\numberline {61}{\ignorespaces Schematic of the FPGA\relax }}{40}{figure.caption.80}
+\contentsline {figure}{\numberline {62}{\ignorespaces Bitstream for 2-input OR gate\relax }}{41}{figure.caption.81}
+\contentsline {figure}{\numberline {63}{\ignorespaces Output waveforms for an OR Gate\relax }}{43}{figure.caption.82}
+\addvspace {10pt}
+\addvspace {10pt}

@@ -1,0 +1,73 @@
+********************************************************************************
+Product   : Virtuoso(R) XStream Out
+Program   : @(#)$CDS: strmout version 6.1.7-64b 11/09/2015 12:41 (sjfbm191) $
+          : sub-version  IC6.1.7-64b.78 
+Started at: 06-Apr-2019  13:47:16
+User Name : smdp
+Host Name : vlsi
+Directory : /home/smdp/Desktop/sumit_work/sumit_cadence
+CADENCE Design Systems, Inc.
+********************************************************************************
+Info: Cellview Rev Num:99,  Tech Rev Num:59
+
+INFO (XSTRM-217): Reading the layer map file, /home/user/PDKfiles/scl_pdk/design_kit/pdklib/cadence/OA/ts018_compana_4M1L_OA/rev0.0/ref_libs/ts018_scl_prim/ts018_scl_prim.layermap
+INFO (XSTRM-217): Reading the object map file, /home/user/PDKfiles/scl_pdk/design_kit/pdklib/cadence/OA/ts018_compana_4M1L_OA/rev0.0/ref_libs/ts018_scl_prim/ts018_scl_prim.objectmap
+INFO (XSTRM-162): You have not used the viaMap option. If the OpenAccess design has native oaVia instances, use the -viaMap option for preserving oaVia instances in a Stream Out - Stream In round trip. Using the -viaMap option improves performance and VM usage of applications using the Streamed-In design.  For details on the viaMap option, refer to the "Design Data Translator's Reference" guide for XStream.
+
+Summary of Options :
+library                                 sumitfpga
+strmFile                                /home/smdp/Desktop/sumit_work/sumit_cadence/fpga.calibre.db
+topCell                                 fpga
+view                                    layout
+runDir                                  /home/smdp/Desktop/sumit_work/sumit_cadence/
+logFile                                 PIPO.LOG.fpga
+summaryFile                             PIPO.SUM.fpga
+layerMap                                /home/user/PDKfiles/scl_pdk/design_kit/pdklib/cadence/OA/ts018_compana_4M1L_OA/rev0.0/ref_libs/ts018_scl_prim/ts018_scl_prim.layermap
+objectMap                                /home/user/PDKfiles/scl_pdk/design_kit/pdklib/cadence/OA/ts018_compana_4M1L_OA/rev0.0/ref_libs/ts018_scl_prim/ts018_scl_prim.objectmap
+case                                    Preserve
+convertDot                              node
+
+INFO (XSTRM-223): 1. Translating cellView ts018_scl_prim/pmos_18/layout as STRUCTURE pmos_18_CDNS_554538636790.
+WARNING (XSTRM-35): The objects in the layer-purpose pair 'instance:drawing' are ignored. This is because the layer-purpose pair used in the design is not specified in the layer map file. Specify the layer-purpose pair in the layer map file and try again.
+INFO (XSTRM-223): 2. Translating cellView ts018_scl_prim/nmos_18/layout as STRUCTURE nmos_18_CDNS_554538636791.
+INFO (XSTRM-223): 3. Translating cellView ts018_scl_prim/M1_PO/layout as STRUCTURE M1_PO_CDNS_554538636790.
+INFO (XSTRM-223): 4. Translating cellView ts018_scl_prim/nmos_18/layout as STRUCTURE nmos_18_CDNS_554538636792.
+INFO (XSTRM-223): 5. Translating cellView ts018_scl_prim/pmos_18/layout as STRUCTURE pmos_18_CDNS_554538636793.
+INFO (XSTRM-223): 6. Translating cellView sumitfpga/inv/layout as STRUCTURE inv.
+WARNING (XSTRM-154): The object map file does not contain any mapping for the OpenAccess object 'Marker' and the sub-object 'annotation'. Therefore, these objects in the design will not be translated. To enable the translation of these objects in the Stream file, provide a valid mapping in the object map file. For details on the format of object map file, refer to the "Design Data Translator's Reference" guide for XStream.
+INFO (XSTRM-223): 7. Translating cellView ts018_scl_prim/M2_M1_S/layout as STRUCTURE M2_M1_S_CDNS_554538636791.
+INFO (XSTRM-223): 8. Translating cellView ts018_scl_prim/M1_PO_4X/layout as STRUCTURE M1_PO_4X_CDNS_554538636792.
+INFO (XSTRM-223): 9. Translating cellView sumitfpga/mux_2_1/layout as STRUCTURE mux_2_1.
+INFO (XSTRM-223): 10. Translating cellView ts018_scl_prim/pmos_18/layout as STRUCTURE pmos_18_CDNS_554538636794.
+INFO (XSTRM-223): 11. Translating cellView ts018_scl_prim/pmos_18/layout as STRUCTURE pmos_18_CDNS_554538636795.
+INFO (XSTRM-223): 12. Translating cellView sumitfpga/fpga/layout as STRUCTURE fpga.
+WARNING (XSTRM-154): The object map file does not contain any mapping for the OpenAccess object 'Marker' and the sub-object 'error'. Therefore, these objects in the design will not be translated. To enable the translation of these objects in the Stream file, provide a valid mapping in the object map file. For details on the format of object map file, refer to the "Design Data Translator's Reference" guide for XStream.
+WARNING (XSTRM-154): The object map file does not contain any mapping for the OpenAccess object 'Boundary' and the sub-object 'Snap'. Therefore, these objects in the design will not be translated. To enable the translation of these objects in the Stream file, provide a valid mapping in the object map file. For details on the format of object map file, refer to the "Design Data Translator's Reference" guide for XStream.
+
+Summary of Objects Translated:
+	Scalar Instances:                       35139
+	Array Instances:                        0
+	Polygons:                               0
+	Paths:                                  0
+	Rectangles:                             393
+	Lines:                                  0
+	Arcs:                                   0
+	Donuts:                                 0
+	Dots:                                   0
+	Ellipses:                               0
+	Boundaries:                             1
+	Area Blockages:                         0
+	Layer Blockages:                        0
+	Area Halos:                             0
+	Markers:                                0
+	Rows:                                   0
+	Standard Vias                           22
+	Custom Vias:                            0
+	CdsGen Vias:                            0
+	Pathsegs:                               52
+	Text:                                   26
+	TextDisplay:                            0
+	Cells:                                  12
+
+Elapsed Time: 1.6s   User Time: 0.2s   CPU Time: 0.1s   Peak VM: 20900KB
+INFO (XSTRM-234): Translation completed. '0' error(s) and '4' warning(s) found.

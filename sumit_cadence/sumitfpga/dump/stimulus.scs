@@ -1,0 +1,23 @@
+simulator lang=spectre 
+parameters VDD = 1.8
+parameters VMM = 0.5
+//tr is (transition time)/2
+parameters tr = 50p 
+//f is the fall time 
+//parameters f = 100p
+//K is the signal period 
+parameters K = 40n 
+
+vVdd (vdd 0) vsource dc=VDD
+vGnd (gnd 0) vsource dc=0
+
+vWL (WL 0) vsource type=pwl wave=\[
++ ( 0*K   ) VDD  ( 1*K-tr) VDD
++ ( 1*K+tr) VDD  ( 2*K-tr) VDD
++ ( 2*K+tr) VDD  ( 3*K-tr) VDD
++ ( 3*K+tr) 0    ( 4*K-tr) 0
++ ( 4*K+tr) 0    ( 5*K-tr) 0
++ ( 5*K+tr) 0    ( 6*K-tr) 0
++ ( 6*K+tr) 0    ( 7*K-tr) 0
++ ( 7*K+tr) 0    ( 8*K-tr) 0
++ ]

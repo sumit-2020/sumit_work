@@ -1,0 +1,823 @@
+\def\code#1{\texttt{#1}}
+\chapter{Appendix A}
+\label{chap:intro}
+\vspace{-0.3 cm}
+
+
+\section{A.I \qquad Architecture XML file of our FPGA}
+
+\paragraph{}
+\begin{lstlisting}
+<architecture>
+
+  <!-- 
+       ODIN II specific config begins 
+       Describes the types of user-specified netlist blocks (in blif, this corresponds to 
+       ".model [type_of_block]") that this architecture supports.
+
+       Note: Basic LUTs, I/Os, and flip-flops are not included here as there are 
+       already special structures in blif (.names, .input, .output, and .latch) 
+       that describe them.
+  -->
+  <models>
+  </models>
+  <!-- ODIN II specific config ends -->
+
+  <!-- Physical descriptions begin -->
+  <layout>
+     <auto_layout aspect_ratio="1.000000">
+        <!--Perimeter of 'io' blocks with 'EMPTY' blocks at corners-->
+        <perimeter type="io" priority="100"/>
+        <corners type="EMPTY" priority="101"/>
+        <!--Fill with 'clb'-->
+        <fill type="clb" priority="10"/>
+        </auto_layout>
+</layout>
+	<device>
+		<sizing R_minW_nmos="6065.520020" R_minW_pmos="18138.500000"/>
+		<area grid_logic_tile_area="7238.080078"/>
+		<chan_width_distr>
+		<x distr="uniform" peak="1.000000"/>
+			<y distr="uniform" peak="1.000000"/>
+		</chan_width_distr>
+		<switch_block type="wilton" fs="3"/>
+	<connection_block input_switch_name="ipin_cblock"/>
+        </device>
+	<switchlist>
+		<switch type="mux" name="0" R="0.000000" Cin="0.000000e+00" Cout="0.000000e+00" Tdel="7.958000e-11" mux_trans_size="2.074780" buf_size="19.261999"/>
+	<!--switch ipin_cblock resistance set to yeild for 4x minimum drive strength buffer-->
+        <switch type="mux" name="ipin_cblock" R="1516.380005" Cout="0." Cin="0.000000e+00" Tdel="7.362000e-11" mux_trans_size="1.240240" buf_size="auto"/>
+        </switchlist>
+	<segmentlist>
+		<segment freq="1.000000" length="1" type="unidir" Rmetal="0.000000" Cmetal="0.000000e+00">
+			<mux name="0"/>
+			<sb type="pattern">1 1</sb>
+			<cb type="pattern">1</cb>
+		</segment>
+	</segmentlist>
+
+  <complexblocklist>
+
+    <!-- Define I/O pads begin -->
+    <!-- Capacity is a unique property of I/Os, it is the maximum number of I/Os that can be placed at the same (X,Y) location on the FPGA -->
+    <pb_type name="io" capacity="1">
+      <input name="outpad" num_pins="1"/>
+      <output name="inpad" num_pins="1"/>
+      <clock name="clock" num_pins="1"/>
+
+      <!-- IOs can operate as either inputs or outputs.
+	     Delays below come from Ian Kuon. They are small, so they should be interpreted as
+	     the delays to and from registers in the I/O (and generally I/Os are registered 
+	     today and that is when you timing analyze them.
+	     -->
+      <mode name="inpad">
+        <pb_type name="inpad" blif_model=".input" num_pb="1">
+          <output name="inpad" num_pins="1"/>
+        </pb_type>
+        <interconnect>
+          <direct name="inpad" input="inpad.inpad" output="io.inpad">
+            <delay_constant max="4.791000e-11" in_port="inpad.inpad" out_port="io.inpad"/>
+          </direct>
+        </interconnect>
+
+      </mode>
+      <mode name="outpad">
+        <pb_type name="outpad" blif_model=".output" num_pb="1">
+          <input name="outpad" num_pins="1"/>
+        </pb_type>
+        <interconnect>
+          <direct name="outpad" input="io.outpad" output="outpad.outpad">
+            <delay_constant max="1.557000e-11" in_port="io.outpad" out_port="outpad.outpad"/>
+          </direct>
+        </interconnect>
+      </mode>
+
+      <!-- Every input pin is driven by 100% of the tracks in a channel, every output pin is driven by 100% of the tracks in a channel -->
+      <fc in_type="frac" in_val="1" out_type="frac" out_val="1"/>
+
+      <!-- IOs go on the periphery of the FPGA, for consistency, 
+          make it physically equivalent on all sides so that only one definition of I/Os is needed.
+          If I do not make a physically equivalent definition, then I need to define 4 different I/Os, one for each side of the FPGA
+        -->
+      <pinlocations pattern="custom">
+        <loc side="left">io.outpad io.inpad io.clock</loc>
+        <loc side="top">io.outpad io.inpad io.clock</loc>
+        <loc side="right">io.outpad io.inpad io.clock</loc>
+        <loc side="bottom">io.outpad io.inpad io.clock</loc>
+      </pinlocations>
+
+      <!-- Place I/Os on the sides of the FPGA -->
+      <power method="ignore"/>			
+    </pb_type>
+    <!-- Define I/O pads ends -->
+
+    <!-- Define general purpose logic block (CLB) begin -->
+    <pb_type name="clb">
+      <input name="I" num_pins="4" equivalent="full"/>
+      <output name="O" num_pins="1" equivalent="instance"/>
+      <clock name="clk" num_pins="1"/>
+
+      <!-- Describe basic logic element. -->
+      <!-- Define 6-LUT mode -->
+          <pb_type name="ble4" num_pb="1">
+            <input name="in" num_pins="4"/>
+            <output name="out" num_pins="1"/>
+            <clock name="clk" num_pins="1"/> 
+
+            <!-- Define LUT -->
+            <pb_type name="lut4" blif_model=".names" num_pb="1" class="lut">
+              <input name="in" num_pins="4" port_class="lut_in"/>
+              <output name="out" num_pins="1" port_class="lut_out"/>
+              <!-- LUT timing using delay matrix -->
+              <delay_matrix type="max" in_port="lut4.in" out_port="lut4.out">
+                2.063000e-10
+                2.063000e-10
+                2.063000e-10
+                2.063000e-10
+              </delay_matrix>
+            </pb_type>
+
+            <!-- Define flip-flop -->
+            <pb_type name="ff" blif_model=".latch" num_pb="1" class="flipflop">
+              <input name="D" num_pins="1" port_class="D"/>
+              <output name="Q" num_pins="1" port_class="Q"/>
+              <clock name="clk" num_pins="1" port_class="clock"/>
+			  <!-- setup time included in LUT delay -->
+              <T_setup value="0.000000e-10" port="ff.D" clock="clk"/>
+              <T_clock_to_Q max="8.406000e-11" port="ff.Q" clock="clk"/>
+            </pb_type>
+
+            <interconnect>
+              <direct name="direct1" input="ble4.in" output="lut4[0:0].in"/>
+              <direct name="direct2" input="lut4.out" output="ff.D">
+                <!-- Advanced user option that tells CAD tool to find LUT+FF pairs in netlist -->
+                <pack_pattern name="ble6" in_port="lut4.out" out_port="ff.D"/>
+              </direct>
+              <direct name="direct3" input="ble4.clk" output="ff.clk"/>                    
+              <mux name="mux1" input="ff.Q lut4.out" output="ble4.out">
+              </mux>
+            </interconnect>
+          </pb_type>
+      <interconnect>
+        <!-- We use a full crossbar to get logical equivalence at inputs of CLB  -->
+        <complete name="crossbar" input="clb.I ble4[0:0].out" output="ble4[0:0].in">
+          <delay_constant max="5.043000e-11" in_port="clb.I" out_port="ble4[0:0].in"/>
+          <delay_constant max="5.031000e-11" in_port="ble4[0:0].out" out_port="ble4[0:0].in"/>
+        </complete>
+        <complete name="clks" input="clb.clk" output="ble4[0:0].clk">
+        </complete>
+        <direct name="clbouts1" input="ble4[0:0].out" output="clb.O"/>
+      </interconnect>
+
+      <!-- Every input pin is driven by 100% of the tracks in a channel, every output pin is driven by 100% of the tracks in a channel -->
+      <fc in_type="frac" in_val="1" out_type="frac" out_val="1"/>
+
+      <pinlocations pattern="custom">
+          <loc side="left">clb.I[0] clb.clk</loc> 
+          <loc side="top">clb.I[1]</loc> 
+          <loc side="right">clb.I[2] clb.O</loc> 
+          <loc side="bottom">clb.I[3]</loc>     
+        </pinlocations>
+
+      <!-- Place this general purpose logic block in any unspecified column -->
+      </pb_type>
+    <!-- Define general purpose logic block (CLB) ends -->
+
+  </complexblocklist>
+</architecture>
+\end{lstlisting}
+
+
+\section{A.II \qquad Bitstream to binary stimulus - script}
+
+\paragraph{}
+\begin{lstlisting}
+import sys
+import csv
+sys.stdout = open('memory_data_compact.txt', 'w')
+data = list(csv.reader(open('memory_mapping.csv')))
+
+sys.stdout.write('BL1       BL1       0 000 ')
+
+for j in range(1,17):
+	for k in range(1,10):
+		sys.stdout.write(str(data[j][4*k-3]))
+print(' 00000000000000')
+
+sys.stdout.write('BL2       BL2       0 000 ')
+for j in range(1,17):
+	for k in range(1,10):
+		sys.stdout.write(str(data[j][4*k-2]))
+print(' 00000000000000')
+
+sys.stdout.write('BL3       BL3       0 000 ')
+for j in range(1,17):
+	for k in range(1,10):
+		sys.stdout.write(str(data[j][4*k-1]))
+print(' 00000000000000')
+
+sys.stdout.write('BL4       BL4       0 000 ')
+for j in range(1,17):
+	for k in range(1,10):
+		sys.stdout.write(str(data[j][4*k]))
+print(' 00000000000000')
+
+\end{lstlisting}
+
+\section{A.III \qquad binary sequences to ADE L .scs creating script }
+
+\paragraph{}
+\begin{lstlisting}
+import sys
+import fileinput
+orig_stdout = sys.stdout
+sys.stdout = open('stimulus.scs', 'w')
+TIM=147
+print('simulator lang=spectre') 
+print('parameters VDD = 1.8')
+print('//tr is (transition time)/2')
+print('parameters tr = 1n') 
+print('//f is the fall time') 
+print('//parameters f = 100p')
+print('//K is the signal period for programming') 
+print('parameters K = 5u') 
+print('//L is the signal period for running') 
+print('parameters L = 0.5u')
+print('\n')
+print('vVdd (vdd 0) vsource dc=VDD')
+print('vGnd (gnd 0) vsource dc=0')
+print('\n')
+
+lines = [line.rstrip('\n') for line in open('memory_data_compact.txt','r')]
+
+while '' in lines:
+    lines.remove('')
+
+for line in lines:
+	words=line.split()
+	print('v'+words[0]+' ('+words[1]+ ' '+words[2]+') vsource type=pwl wave=\[')
+	sent=words[3:]
+	sen=''.join(sent)
+	sen=sen.replace(" ", "")
+	bits=list(sen)
+	for i in range(len(bits)):
+		ostr=""
+		ostr+="+ ("
+		if i==0:
+			ostr+=" 0*K   ) "
+		else:
+			if i<TIM:
+				ostr+=str(i).rjust(2)+'*K+tr) '
+			else:
+				ostr+=str(TIM).rjust(2)+'*K+'+str(i-TIM).rjust(2)+'*L+tr) '
+		if bits[i]=='0':
+			if i<TIM:
+				ostr+='0    ('+str(i+1).rjust(2)+'*K-tr) 0'
+			else:
+				ostr+='0    ('+str(TIM).rjust(2)+'*K+'+str(i-TIM+1).rjust(2)+'*L-tr) 0'
+		if bits[i]=='1':
+			if i<TIM:
+				ostr+='VDD  ('+str(i+1).rjust(2)+'*K-tr) VDD'
+			else:
+				ostr+='VDD  ('+str(TIM).rjust(2)+'*K+'+str(i-TIM+1).rjust(2)+'*L-tr) VDD'
+		print(ostr)
+	print('+ ]')
+
+	if words[0][0]=='B' and words[0][1]=='L':
+		print('vBL_'+words[0][2:]+' (BL_'+words[1][2:]+ ' '+words[2]+') vsource type=pwl wave=\[')
+		sent=words[3:]
+		sen=''.join(sent)
+		sen=sen.replace(" ", "")
+		bits=list(sen)
+		for i in range(len(bits)):
+			ostr=""
+			ostr+="+ ("
+			if i==0:
+				ostr+=" 0*K   ) "
+			else:
+				if i<TIM:
+					ostr+=str(i).rjust(2)+'*K+tr) '
+				else:
+					ostr+=str(TIM).rjust(2)+'*K+'+str(i-TIM).rjust(2)+'*L+tr) '
+			if bits[i]=='0':
+				if i<TIM:
+					ostr+='VDD  ('+str(i+1).rjust(2)+'*K-tr) VDD'
+				else:
+					ostr+='VDD  ('+str(TIM).rjust(2)+'*K+'+str(i-TIM+1).rjust(2)+'*L-tr) VDD'
+			if bits[i]=='1':
+				if i<TIM:
+					ostr+='0    ('+str(i+1).rjust(2)+'*K-tr) 0'
+				else:
+					ostr+='0    ('+str(TIM).rjust(2)+'*K+'+str(i-TIM+1).rjust(2)+'*L-tr) 0'
+			print(ostr)
+		print('+ ]')
+		
+sys.stdout.close()
+sys.stdout=orig_stdout 
+# Read in the file
+with open('stimulus.scs', 'r') as file :
+  filedata = file.read()
+
+# Replace the target string
+filedata = filedata.replace('BL', 'BitLine')
+
+# Write the file out again
+with open('stimulus.scs', 'w') as file:
+  file.write(filedata)
+
+\end{lstlisting}
+
+\section{A.IV \qquad .scs for D Flip Flop}
+
+\paragraph{}
+\begin{lstlisting}
+simulator lang=spectre
+parameters VDD = 1.8
+//tr is (transition time)/2
+parameters tr = 50p
+//f is the fall time
+//parameters f = 100p
+//K is the signal period
+parameters K = 40n
+
+
+vVdd (vdd 0) vsource dc=VDD
+vGnd (gnd 0) vsource dc=0
+
+
+vPRE (PRE 0) vsource type=pwl wave=\[
++ ( 0*K   ) VDD  ( 1*K-tr) VDD
++ ( 1*K+tr) VDD  ( 2*K-tr) VDD
++ ( 2*K+tr) VDD  ( 3*K-tr) VDD
++ ( 3*K+tr) VDD  ( 4*K-tr) VDD
++ ( 4*K+tr) VDD  ( 5*K-tr) VDD
++ ( 5*K+tr) VDD  ( 6*K-tr) VDD
++ ( 6*K+tr) VDD  ( 7*K-tr) VDD
++ ( 7*K+tr) VDD  ( 8*K-tr) VDD
++ ( 8*K+tr) VDD  ( 9*K-tr) VDD
++ ( 9*K+tr) VDD  (10*K-tr) VDD
++ (10*K+tr) VDD  (11*K-tr) VDD
++ (11*K+tr) 0    (12*K-tr) 0
++ (12*K+tr) 0    (13*K-tr) 0
++ (13*K+tr) 0    (14*K-tr) 0
++ (14*K+tr) 0    (15*K-tr) 0
++ (15*K+tr) VDD  (16*K-tr) VDD
++ (16*K+tr) VDD  (17*K-tr) VDD
++ (17*K+tr) VDD  (18*K-tr) VDD
++ (18*K+tr) VDD  (19*K-tr) VDD
++ (19*K+tr) VDD  (20*K-tr) VDD
++ (20*K+tr) VDD  (21*K-tr) VDD
++ (21*K+tr) VDD  (22*K-tr) VDD
++ (22*K+tr) VDD  (23*K-tr) VDD
++ (23*K+tr) VDD  (24*K-tr) VDD
++ (24*K+tr) VDD  (25*K-tr) VDD
++ (25*K+tr) VDD  (26*K-tr) VDD
++ (26*K+tr) VDD  (27*K-tr) VDD
++ (27*K+tr) VDD  (28*K-tr) VDD
++ (28*K+tr) VDD  (29*K-tr) VDD
++ (29*K+tr) VDD  (30*K-tr) VDD
++ (30*K+tr) VDD  (31*K-tr) VDD
++ (31*K+tr) VDD  (32*K-tr) VDD
++ (32*K+tr) VDD  (33*K-tr) VDD
++ ]
+vCLR (CLR 0) vsource type=pwl wave=\[
++ ( 0*K   ) 0    ( 1*K-tr) 0
++ ( 1*K+tr) 0    ( 2*K-tr) 0
++ ( 2*K+tr) 0    ( 3*K-tr) 0
++ ( 3*K+tr) 0    ( 4*K-tr) 0
++ ( 4*K+tr) 0    ( 5*K-tr) 0
++ ( 5*K+tr) 0    ( 6*K-tr) 0
++ ( 6*K+tr) 0    ( 7*K-tr) 0
++ ( 7*K+tr) 0    ( 8*K-tr) 0
++ ( 8*K+tr) 0    ( 9*K-tr) 0
++ ( 9*K+tr) 0    (10*K-tr) 0
++ (10*K+tr) 0    (11*K-tr) 0
++ (11*K+tr) VDD  (12*K-tr) VDD
++ (12*K+tr) VDD  (13*K-tr) VDD
++ (13*K+tr) VDD  (14*K-tr) VDD
++ (14*K+tr) VDD  (15*K-tr) VDD
++ (15*K+tr) VDD  (16*K-tr) VDD
++ (16*K+tr) VDD  (17*K-tr) VDD
++ (17*K+tr) VDD  (18*K-tr) VDD
++ (18*K+tr) VDD  (19*K-tr) VDD
++ (19*K+tr) VDD  (20*K-tr) VDD
++ (20*K+tr) VDD  (21*K-tr) VDD
++ (21*K+tr) VDD  (22*K-tr) VDD
++ (22*K+tr) VDD  (23*K-tr) VDD
++ (23*K+tr) VDD  (24*K-tr) VDD
++ (24*K+tr) VDD  (25*K-tr) VDD
++ (25*K+tr) VDD  (26*K-tr) VDD
++ (26*K+tr) VDD  (27*K-tr) VDD
++ (27*K+tr) VDD  (28*K-tr) VDD
++ (28*K+tr) VDD  (29*K-tr) VDD
++ (29*K+tr) VDD  (30*K-tr) VDD
++ (30*K+tr) VDD  (31*K-tr) VDD
++ (31*K+tr) VDD  (32*K-tr) VDD
++ (32*K+tr) VDD  (33*K-tr) VDD
++ ]
+vCLK (CLK 0) vsource type=pwl wave=\[
++ ( 0*K   ) 0    ( 1*K-tr) 0
++ ( 1*K+tr) 0    ( 2*K-tr) 0
++ ( 2*K+tr) VDD  ( 3*K-tr) VDD
++ ( 3*K+tr) VDD  ( 4*K-tr) VDD
++ ( 4*K+tr) 0    ( 5*K-tr) 0
++ ( 5*K+tr) 0    ( 6*K-tr) 0
++ ( 6*K+tr) VDD  ( 7*K-tr) VDD
++ ( 7*K+tr) VDD  ( 8*K-tr) VDD
++ ( 8*K+tr) 0    ( 9*K-tr) 0
++ ( 9*K+tr) 0    (10*K-tr) 0
++ (10*K+tr) VDD  (11*K-tr) VDD
++ (11*K+tr) VDD  (12*K-tr) VDD
++ (12*K+tr) 0    (13*K-tr) 0
++ (13*K+tr) 0    (14*K-tr) 0
++ (14*K+tr) VDD  (15*K-tr) VDD
++ (15*K+tr) VDD  (16*K-tr) VDD
++ (16*K+tr) 0    (17*K-tr) 0
++ (17*K+tr) 0    (18*K-tr) 0
++ (18*K+tr) VDD  (19*K-tr) VDD
++ (19*K+tr) VDD  (20*K-tr) VDD
++ (20*K+tr) 0    (21*K-tr) 0
++ (21*K+tr) 0    (22*K-tr) 0
++ (22*K+tr) VDD  (23*K-tr) VDD
++ (23*K+tr) VDD  (24*K-tr) VDD
++ (24*K+tr) 0    (25*K-tr) 0
++ (25*K+tr) 0    (26*K-tr) 0
++ (26*K+tr) VDD  (27*K-tr) VDD
++ (27*K+tr) VDD  (28*K-tr) VDD
++ (28*K+tr) 0    (29*K-tr) 0
++ (29*K+tr) 0    (30*K-tr) 0
++ (30*K+tr) VDD  (31*K-tr) VDD
++ (31*K+tr) VDD  (32*K-tr) VDD
++ (32*K+tr) 0    (33*K-tr) 0
++ ]
+vD (D 0) vsource type=pwl wave=\[
++ ( 0*K   ) VDD  ( 1*K-tr) VDD
++ ( 1*K+tr) VDD  ( 2*K-tr) VDD
++ ( 2*K+tr) VDD  ( 3*K-tr) VDD
++ ( 3*K+tr) VDD  ( 4*K-tr) VDD
++ ( 4*K+tr) VDD  ( 5*K-tr) VDD
++ ( 5*K+tr) VDD  ( 6*K-tr) VDD
++ ( 6*K+tr) VDD  ( 7*K-tr) VDD
++ ( 7*K+tr) VDD  ( 8*K-tr) VDD
++ ( 8*K+tr) VDD  ( 9*K-tr) VDD
++ ( 9*K+tr) VDD  (10*K-tr) VDD
++ (10*K+tr) VDD  (11*K-tr) VDD
++ (11*K+tr) VDD  (12*K-tr) VDD
++ (12*K+tr) VDD  (13*K-tr) VDD
++ (13*K+tr) VDD  (14*K-tr) VDD
++ (14*K+tr) VDD  (15*K-tr) VDD
++ (15*K+tr) VDD  (16*K-tr) VDD
++ (16*K+tr) VDD  (17*K-tr) VDD
++ (17*K+tr) VDD  (18*K-tr) VDD
++ (18*K+tr) VDD  (19*K-tr) VDD
++ (19*K+tr) VDD  (20*K-tr) VDD
++ (20*K+tr) VDD  (21*K-tr) VDD
++ (21*K+tr) VDD  (22*K-tr) VDD
++ (22*K+tr) VDD  (23*K-tr) VDD
++ (23*K+tr) VDD  (24*K-tr) VDD
++ (24*K+tr) VDD  (25*K-tr) VDD
++ (25*K+tr) VDD  (26*K-tr) VDD
++ (26*K+tr) VDD  (27*K-tr) VDD
++ (27*K+tr) VDD  (28*K-tr) VDD
++ (28*K+tr) VDD  (29*K-tr) VDD
++ (29*K+tr) VDD  (30*K-tr) VDD
++ (30*K+tr) VDD  (31*K-tr) VDD
++ (31*K+tr) VDD  (32*K-tr) VDD
++ (32*K+tr) VDD  (33*K-tr) VDD
++ ]
+\end{lstlisting}
+
+\section{A.V \qquad Decoder SKILL code}
+
+\paragraph{}
+\begin{lstlisting}
+
+load("./skill/Schematic.il")
+procedure(DecoderSchematic(libName cellName WIDTH OUTPUTS)
+  ;; Define the local variables
+  prog((cvid x y pin pinName k h temp a b out inst)
+    ;; Open the cell and its schematic view
+    cvid = dbOpenCellViewByType(libName cellName "schematic" "schematic" "a")
+	;; Clean the schematic view
+    ece432DeleteObjectsSchematic(cvid)
+	;; The coordinate of the origin point for the schematic
+    x=0
+    y=0	
+    ;; Create top level pins	
+	;; Create input pins
+	for(u 0 WIDTH-1
+		a=sprintf(nil "A%L" u)
+		pin=ece432SchematicCreatePin(cvid a "input" x:y "R0")
+      	y=y+0.5
+    );; end for(u
+	;; Create output pins
+	for(q 0 OUTPUTS-1
+		out=sprintf(nil "WL%L" q)
+		pin=ece432SchematicCreatePin(cvid out "output" x:y "R0")
+      	y=y+0.5
+    );; end for(q
+	;; Create inout pins
+    foreach(pinName list("vdd" "gnd")
+      pin=ece432SchematicCreatePin(cvid pinName "inputOutput" x:y "R0")
+      y=y+0.5
+    )
+	;; The coordinate of the origin point for the schematic
+    x=1
+    y=0
+	;; Create the decoder using tx-gates
+	for(k 0 OUTPUTS-1
+	  ;; Define the input and output net name of the first inverter
+	  temp=k
+	  if(mod(temp 2)==1 then
+		add0="A0"
+	  else
+		add0="A0_"
+      )
+      temp=temp/2
+	  if(mod(temp 2)==1 then
+		add1="A1"
+	  else
+		add1="A1_"
+      )
+      temp=temp/2
+	  if(mod(temp 2)==1 then
+		add2="A2"
+	  else
+		add2="A2_"
+      )
+      temp=temp/2
+	  if(mod(temp 2)==1 then
+		add3="A3"
+	  else
+		add3="A3_"
+      )
+      temp=temp/2
+	  if(mod(temp 2)==1 then
+		add4="A4"
+	  else
+		add4="A4_"
+      )
+      temp=temp/2
+	  if(mod(temp 2)==1 then
+		add5="A5"
+	  else
+		add5="A5_"
+      )
+      temp=temp/2
+	  if(mod(temp 2)==1 then
+		add6="A6"
+	  else
+		add6="A6_"
+      )
+	  a=sprintf(nil "%s%s%s%s" add0 add1 add2 add3)
+	  b=sprintf(nil "%s%s%s" add4 add5 add6)
+	  out=sprintf(nil "WL%L" k)
+	  ;; Instantiate the kth tx-gate with ece432SchematicCreateInst() procedure, 
+	  ;; which is defined in the file 'ece432Schematic.il'. 
+	  ;; This procedure needs 10 paramters
+	  inst = ece432SchematicCreateInst(
+		       ;; Cell view id
+			   cvid 			   
+			   ;; Name of the library containing the inverter cell
+			   libName			   
+		       ;; The tx-gate cell name  
+	           "and_2"  			   
+			   ;; Cell view type, always be "symbol" here
+			   "symbol" 			   
+			   ;; Instance name
+		       sprintf(nil "AND_%L" k) 			   
+			   ;; The following list defines the connections of the left side pins 
+			   ;; in the symbol view; For our inverter, 'in' is the only pin on the left.
+			   ;; The inverter pin 'in' is connected with the net 'inName'.
+			   ;; If there are multiple pins on the left side, you can use the below way to define.
+			   ;;    list(list("in1" in1net)
+			   ;;         list("in2" in2net))
+			   ;; If there is no pin on the left side, this parameter should be 'nil'.
+	  		   list(list("a" a) 
+			   		list("b" b))			   
+			   ;; The following list defines the connections of the right side pins 
+			   ;; in the symbol view; For our inverter, 'out' is the only pin on the right.
+	  		   list(list("out" out)) 
+			   ;; The following list defines the connections of the top side pins 
+			   ;; in the symbol view; For our inverter, 'VDD' is the only pin on the top.
+	  		   list(list("vdd"  "vdd")) 
+			   ;; The following list defines the connections of the bottom side pins 
+			   ;; in the symbol view; For our inverter, 'VSS' is the only pin on the bottom.
+		       list(list("gnd"  "gnd"))		   
+			   ;; Location of the instance
+	           x:y 		   
+			   ;; Rotation of the instance, such as "R0", "R90", "R180", "R270", "MX", "MY", ...
+			   "R0"
+			 );; end inst =       
+	  y=y-2	  
+	);; end for(k
+	;; The coordinate of the origin point for the schematic
+    x=-5
+    y=0	
+	;; Create the decoder using tx-gates
+	for(k 0 15
+	  ;; Define the input and output net name of the first inverter
+	  temp=k
+	  if(mod(temp 2)==1 then
+		add0="A0"
+	  else
+		add0="A0_"
+      )
+      temp=temp/2
+	  if(mod(temp 2)==1 then
+		add1="A1"
+	  else
+		add1="A1_"
+      )
+      temp=temp/2
+	  if(mod(temp 2)==1 then
+		add2="A2"
+	  else
+		add2="A2_"
+      )
+      temp=temp/2
+	  if(mod(temp 2)==1 then
+		add3="A3"
+	  else
+		add3="A3_"
+      )
+	  a=sprintf(nil "%s" add0)
+	  b=sprintf(nil "%s" add1)
+	  c=sprintf(nil "%s" add2)
+	  d=sprintf(nil "%s" add3)
+	  out=sprintf(nil "%s%s%s%s" add0 add1 add2 add3)
+	  ;; Instantiate the kth tx-gate with ece432SchematicCreateInst() procedure, 
+	  ;; which is defined in the file 'ece432Schematic.il'. 
+	  ;; This procedure needs 10 paramters
+	  inst = ece432SchematicCreateInst(
+		       ;; Cell view id
+			   cvid 			   
+			   ;; Name of the library containing the inverter cell
+			   libName		   
+		       ;; The tx-gate cell name  
+	           "and_4"  		   
+			   ;; Cell view type, always be "symbol" here
+			   "symbol" 			   
+			   ;; Instance name
+		       sprintf(nil "AND4_%L" k) 			   
+			   ;; The following list defines the connections of the left side pins 
+			   ;; in the symbol view; For our inverter, 'in' is the only pin on the left.
+			   ;; The inverter pin 'in' is connected with the net 'inName'.
+			   ;; If there are multiple pins on the left side, you can use the below way to define.
+			   ;;    list(list("in1" in1net)
+			   ;;         list("in2" in2net))
+			   ;; If there is no pin on the left side, this parameter should be 'nil'.
+	  		   list(list("a" a) 
+			   		list("b" b)
+			   		list("c" c)
+			   		list("d" d))		   
+			   ;; The following list defines the connections of the right side pins 
+			   ;; in the symbol view; For our inverter, 'out' is the only pin on the right.
+	  		   list(list("out" out)) 
+			   ;; The following list defines the connections of the top side pins 
+			   ;; in the symbol view; For our inverter, 'VDD' is the only pin on the top.
+	  		   list(list("vdd"  "vdd")) 
+			   ;; The following list defines the connections of the bottom side pins 
+			   ;; in the symbol view; For our inverter, 'VSS' is the only pin on the bottom.
+		       list(list("gnd"  "gnd"))		   
+			   ;; Location of the instance
+	           x:y 		   
+			   ;; Rotation of the instance, such as "R0", "R90", "R180", "R270", "MX", "MY", ...
+			   "R0"
+			 );; end inst =	       
+	  y=y-2  
+	);; end for(k
+	;; The coordinate of the origin point for the schematic
+    x=-8
+    y=0	
+	;; Create the decoder using tx-gates
+	for(k 0 7
+	  ;; Define the input and output net name of the first inverter
+	  temp=k
+	  if(mod(temp 2)==1 then
+		add0="A4"
+	  else
+		add0="A4_"
+      )
+      temp=temp/2
+	  if(mod(temp 2)==1 then
+		add1="A5"
+	  else
+		add1="A5_"
+      )
+      temp=temp/2
+	  if(mod(temp 2)==1 then
+		add2="A6"
+	  else
+		add2="A6_"
+      )
+	  a=sprintf(nil "%s" add0)
+	  b=sprintf(nil "%s" add1)
+	  c=sprintf(nil "%s" add2)
+	  out=sprintf(nil "%s%s%s" add0 add1 add2)
+	  ;; Instantiate the kth tx-gate with ece432SchematicCreateInst() procedure, 
+	  ;; which is defined in the file 'ece432Schematic.il'. 
+	  ;; This procedure needs 10 paramters
+	  inst = ece432SchematicCreateInst(
+		       ;; Cell view id
+			   cvid 		   
+			   ;; Name of the library containing the inverter cell
+			   libName		   
+		       ;; The tx-gate cell name  
+	           "and_3"  	   
+			   ;; Cell view type, always be "symbol" here
+			   "symbol" 	   
+			   ;; Instance name
+		       sprintf(nil "AND3_%L" k) 	   
+			   ;; The following list defines the connections of the left side pins 
+			   ;; in the symbol view; For our inverter, 'in' is the only pin on the left.
+			   ;; The inverter pin 'in' is connected with the net 'inName'.
+			   ;; If there are multiple pins on the left side, you can use the below way to define.
+			   ;;    list(list("in1" in1net)
+			   ;;         list("in2" in2net))
+			   ;; If there is no pin on the left side, this parameter should be 'nil'.
+	  		   list(list("a" a) 
+			   		list("b" b)
+			   		list("c" c))	   
+			   ;; The following list defines the connections of the right side pins 
+			   ;; in the symbol view; For our inverter, 'out' is the only pin on the right.
+	  		   list(list("out" out)) 
+			   ;; The following list defines the connections of the top side pins 
+			   ;; in the symbol view; For our inverter, 'VDD' is the only pin on the top.
+	  		   list(list("vdd"  "vdd")) 
+			   ;; The following list defines the connections of the bottom side pins 
+			   ;; in the symbol view; For our inverter, 'VSS' is the only pin on the bottom.
+		       list(list("gnd"  "gnd"))   
+			   ;; Location of the instance
+	           x:y    
+			   ;; Rotation of the instance, such as "R0", "R90", "R180", "R270", "MX", "MY", ...
+			   "R0"
+			 );; end inst =
+	  y=y-2
+	);; end for(k
+;; ******************************Address inverters***************************
+	;; The coordinate of the origin point for the schematic
+    x=-12
+    y=0	
+	;; Create the decoder using tx-gates
+	for(k 0 6
+	  in=sprintf(nil "A%L" k)
+	  out=sprintf(nil "A%L_" k)
+	  ;; Instantiate the kth tx-gate with ece432SchematicCreateInst() procedure, 
+	  ;; which is defined in the file 'ece432Schematic.il'. 
+	  ;; This procedure needs 10 paramters
+	  inst = ece432SchematicCreateInst(
+		       ;; Cell view id
+			   cvid 			   
+			   ;; Name of the library containing the inverter cell
+			   libName			   
+		       ;; The tx-gate cell name  
+	           "inv"  			   
+			   ;; Cell view type, always be "symbol" here
+			   "symbol" 			   
+			   ;; Instance name
+		       sprintf(nil "INVERTER_%L" k) 			   
+			   ;; The following list defines the connections of the left side pins 
+			   ;; in the symbol view; For our inverter, 'in' is the only pin on the left.
+			   ;; The inverter pin 'in' is connected with the net 'inName'.
+			   ;; If there are multiple pins on the left side, you can use the below way to define.
+			   ;;    list(list("in1" in1net)
+			   ;;         list("in2" in2net))
+			   ;; If there is no pin on the left side, this parameter should be 'nil'.
+	  		   list(list("in" in))			   
+			   ;; The following list defines the connections of the right side pins 
+			   ;; in the symbol view; For our inverter, 'out' is the only pin on the right.
+	  		   list(list("out" out)) 
+			   ;; The following list defines the connections of the top side pins 
+			   ;; in the symbol view; For our inverter, 'VDD' is the only pin on the top.
+	  		   list(list("vdd"  "vdd")) 
+			   ;; The following list defines the connections of the bottom side pins 
+			   ;; in the symbol view; For our inverter, 'VSS' is the only pin on the bottom.
+		       list(list("gnd"  "gnd"))		   
+			   ;; Location of the instance
+	           x:y 			   
+			   ;; Rotation of the instance, such as "R0", "R90", "R180", "R270", "MX", "MY", ...
+			   "R0"
+			 );; end inst =	       
+	  y=y-2	  
+	);; end for(k
+	;; Check, save and close the cell view
+	schCheck(cvid)  ;; check the schematic connectivity
+    dbSave(cvid)
+    dbClose(cvid)	
+    return(t)	
+  );; end prog 
+);; end procedure
+/*====================================================================
+ 'let' is the main entrance of the skill program.
+====================================================================*/
+let((WIDTH libName cellName)  ;; N, libName and cellName are variables
+  WIDTH = 7
+  OUTPUTS = 74
+  ;; The name of the library we will put the new cell in
+  libName="sumitfpga"
+  sprintf(cellName "RowDecoder")
+  DecoderSchematic(libName cellName WIDTH OUTPUTS)
+  printf("=== Cell %L Schematic has been created! ===\n", cellName)
+) ;;end let
+\end{lstlisting}

@@ -1,0 +1,28 @@
+%
+% File: abstract.tex
+% Author: V?ctor Bre?a-Medina
+% Description: Contains the text for thesis abstract
+%
+% UoB guidelines:
+%
+% Each copy must include an abstract or summary of the dissertation in not
+% more than 300 words, on one side of A4, which should be single-spaced in a
+% font size in the range 10 to 12. If the dissertation is in a language other
+% than English, an abstract in that language and an abstract in English must
+% be included.
+
+\chapter*{Abstract}
+%\begin{SingleSpace}
+\begin{OnehalfSpacing}
+\paragraph{}
+\end{OnehalfSpacing}
+
+I developed an analytical model for delay through a CMOS inverter including stress variability. My primary aim is to develop layout guidelines for various standard cells around a TSV, depending upon the delay through various cells. 
+
+The stress is modeled analytically for any given $(r, \theta)$ around the TSV. This model is then used to estimate the variation of threshold voltage and mobility, using the analytical models developed for the same. Now, the delay is estimated using the timing delay model used depending upon the threshold voltage \& mobility variations estimated. Now, depending upon the delay through various gates, their placement around a TSV is suggested so that overall delay of the circuit is minimized. The percentage errors of each analytical model is also calculated. 
+
+The delay estimated is used to update .lib file of the standard cell library for pre-characterization for various $(r, \theta)$ around a TSV.
+
+All the simulations and tests were performed in TCAD Sentaurus.
+
+\clearpage 

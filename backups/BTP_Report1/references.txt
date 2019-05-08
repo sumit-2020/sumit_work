@@ -1,0 +1,8 @@
+[1] https://www.digikey.in/en/product-highlight/l/lattice/fpga-portfolio
+[2] http://www.eecg.toronto.edu/~jayar/research/architecture.html
+[3] https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=1410611&tag=1
+[4] https://verilogtorouting.org/
+[5] http://www.eecg.toronto.edu/~jayar/pubs/betz/cicc99.pdf
+[6] B. S. Landman and R. L. Russo, On a Pin or Block Relationship for Partitions of Logic Graphs, IEEE Transactions on Computers, Vol. C-20, 1971,  pp. 1469-1479. 
+[7] Pak k. Chan, Martine D. F. Schlag, Jason Y. Zien, On Routability Prediction for Field Programmable Gate Arrays, Proceedings of 30th ACM/IEEE Design Automation Conference, 1993, pp.326-330.
+

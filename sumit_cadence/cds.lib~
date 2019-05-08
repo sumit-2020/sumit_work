@@ -1,0 +1,19 @@
+﻿SOFTINCLUDE /home/user/cadence/IC617/share/cdssetup/cds.lib
+
+DEFINE analogLib_scl $CDSHOME/tools/dfII/etc/cdslib/artist/analogLib_scl
+DEFINE US_8ths $CDSHOME/tools/dfII/etc/cdslib/sheets/US_8ths
+DEFINE basic $CDSHOME/tools/dfII/etc/cdslib/basic
+DEFINE gpdk045 /home/user/PDKfiles/gpdk045/gpdk045/gpdk045_v_3_5/gpdk045
+DEFINE ts018_scl_prim /home/user/PDKfiles/scl_pdk/design_kit/pdklib/cadence/OA/ts018_compana_4M1L_OA/rev0.0/ref_libs/ts018_scl_prim
+#DEFINE avTech /home/smdp4/cadence/lnx86/tools/assura/etc/avtech/avTech
+DEFINE analogLib /home/user/cadence/IC616/tools/dfII/etc/cdslib/artist/analogLib
+
+DEFINE avTech /home/user/cadence/lnx86/tools/assura/etc/avtech/avTech
+
+DEFINE sumitfpga /home/smdp/Desktop/sumit\ work/sumit_cadence/sumitfpga
+
+DEFINE jaskirat /home/smdp/Desktop/jaskirat/jaskirat
+DEFINE jaskirat1 /home/smdp/Desktop/jaskirat/jaskirat1
+#Removed by ddDeleteObj: DEFINE inverter /home/smdp7/Desktop/jaskirat/inverter
+DEFINE Test /home/smdp/Desktop/jaskirat/Test
+DEFINE jaskirat_45 /home/smdp/Desktop/jaskirat/jaskirat_45

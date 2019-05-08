@@ -1,0 +1,32 @@
+%
+% File: chap01.tex
+% Author: Victor F. Brena-Medina
+% Description: Introduction chapter where the biology goes.
+%
+\let\textcircled=\pgftextcircled
+\chapter{Conclusions}
+\label{chap:conclusion}
+
+This chapter gives a brief of the research work carried out and the conclusions drawn from the same. The future work is also discussed in this chapter.
+
+\section{Conclusion}
+\paragraph{}
+
+FPGAs are very important tools for prototypins digital circuits, accelerating parallel designs and implementing minimal logic at very low cost. Minimal FPGAs are quite promising to be used in products where very little logic is required. There aren't many open source FPGA design flows. We try to develop the same. We first begin with developing models of area and delays for a CLB. These models help to decide the LUT size. Then we perform experiments using different orientations of input pins on a CLB and decide on a spread design. After this, we experiment with different designs in VTR on our FPGA and decide the routing width. Then the programmability decisions are made and the schematics are designed in Schematic L. The 6-T memory cell is sized carefully to avoid bit-flips when nearby cells are being written. Smaller schematics are tested individually for functionality and then the FPGA schematic is designed. The functionality of the FPGA is then tested by implementing a simple circuit and the delay breakdown is identified. 
+ 
+\section{Scope for Future Research}
+\paragraph{}
+
+The future research in this area can be in the following directions:
+
+\begin{itemize}
+
+\item Developing the layout of a CLB, Switch Matrix and I/O Block
+
+\item Laying out the FPGA from its constituents usking SKILL and performing post-layout simulations.
+
+\item Designing a framework to automate the layout of an NxN FPGA
+
+\item Delving into the digital flow for optimizing sizing of transistors at a finer granularity and then developing models to be used for a generic NxN FPGA
+\end{itemize}
+ 

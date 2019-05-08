@@ -1,0 +1,3 @@
+artistResMgrCalcExprSetup("true" "plot" "E0" "delay(?wf1 v("/IO_TOP_1" ?result "tran"), ?value1 0.9, ?edge1 "falling", ?nth1 1, ?td1 738.1, ?wf2 v("/IO_TOP_2" ?result "tran"), ?value2 0.8, ?edge2 "falling", ?nth2 1,  ?td2 738.1 , ?stop nil, ?multiple nil)")
+artistResMgrCalcExprSetup("true" "plot" "E1" "delay(?wf1 v("/IO_TOP_1" ?result "tran"), ?value1 0.9, ?edge1 "falling", ?nth1 1, ?td1 738.1, ?wf2 v("/IO_TOP_2" ?result "tran"), ?value2 0.8, ?edge2 "falling", ?nth2 1,  ?td2 738.1 , ?stop nil, ?multiple nil)")
+artistResMgrCalcExprSetup("true" "plot" "E2" "delay(?wf1 v("/IO_TOP_1" ?result "tran"), ?value1 0.9, ?edge1 "falling", ?nth1 1, ?td1 738.1, ?wf2 v("/IO_TOP_2" ?result "tran"), ?value2 0.8, ?edge2 "falling", ?nth2 1,  ?td2 738.1 , ?stop nil, ?multiple nil)")

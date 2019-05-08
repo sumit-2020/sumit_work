@@ -1,0 +1,18 @@
+import sys
+sys.stdout = open('binarySequence.txt', 'w')
+w, h = 1998, 12;
+Matrix = [['0' for x in range(w)] for y in range(h)] 
+
+for j in range(0,16):
+	for k in range(0,27):
+		string='{0:07b}'.format(j)+'{0:05b}'.format(k)
+		for m in range(0,12):
+			Matrix[m][j*27+k]=string[11-m]
+
+for m in range(0,12):
+	sys.stdout.write(str('A'+str(m)).ljust(4)+'      '+str('A'+str(m)).ljust(4)+'      0 000 ')
+	for j in range(0,16):
+		for k in range(0,27):
+			sys.stdout.write(Matrix[m][j*27+k])
+	sys.stdout.write(' 00000000000000\n')        
+sys.stdout.flush()

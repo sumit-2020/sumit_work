@@ -1,0 +1,11 @@
+simulator lang=spectre 
+parameters VDD = 1.8
+//tr is (transition time)/2
+parameters tr = 50p 
+//f is the fall time 
+//parameters f = 100p
+//K is the signal period 
+parameters K = 40n 
+
+vVdd (vdd 0) vsource dc=VDD
+vGnd (gnd 0) vsource dc=0

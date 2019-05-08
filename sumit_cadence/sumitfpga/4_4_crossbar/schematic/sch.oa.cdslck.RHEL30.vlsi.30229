@@ -1,0 +1,16 @@
+#
+# Edit Lock-Stake file. CAUTION: Please do not change.
+#
+# Information about current Edit Lock Owner.
+#
+LockStakeVersion               1.1
+LoginName                      smdp
+HostName                       vlsi
+ProcessIdentifier              30229
+ProcessCreationTime_UTC        1556519724
+ProcessCreationTime_Readable   Mon Apr 29 12:05:24 2019 IST
+AppIdentifier                  OA File System Design Manager
+OSType                         unix
+ReasonForPlacingEditLock       OpenAccess edit lock
+FilePathUsedToEditLock         /home/smdp/Desktop/sumit_work/sumit_cadence/sumitfpga/4_4_crossbar/schematic/sch.oa.cdslck.dirlck
+TimeEditLocked                 Mon Apr 29 12:34:10 2019 IST

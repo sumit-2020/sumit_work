@@ -1,0 +1,27 @@
+//
+//  Rule file generated on Sat Apr 06 13:47:17 IST 2019
+//     by Calibre Interactive - DRC (v2016.1_14.11)
+//
+//      *** PLEASE DO NOT MODIFY THIS FILE ***
+//
+//
+
+LAYOUT PATH  "fpga.calibre.db"
+LAYOUT PRIMARY "fpga"
+LAYOUT SYSTEM GDSII
+
+DRC RESULTS DATABASE "fpga.drc.results" ASCII 
+DRC MAXIMUM RESULTS 1000
+DRC MAXIMUM VERTEX 4096
+
+DRC CELL NAME YES CELL SPACE XFORM
+DRC SUMMARY REPORT "fpga.drc.summary" REPLACE HIER
+
+VIRTUAL CONNECT COLON NO
+VIRTUAL CONNECT REPORT NO
+
+DRC ICSTATION YES
+
+
+INCLUDE "/home/user/PDKfiles/scl_pdk/design_kit/drclvs_rsf/DRC.header"
+

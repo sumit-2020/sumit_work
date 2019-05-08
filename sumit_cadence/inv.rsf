@@ -1,0 +1,19 @@
+;----------------------------------------------------------------------------
+; @(#)$CDS: assura version av4.1:Production:dfII6.1.7-64b:IC6.1.7-64b.500.4 11/17/16 19:15 (sjfnl814) $
+; sub-version 4.1_USR5_HF8
+;----------------------------------------------------------------------------
+
+
+;----------------------------------------------------------------------------
+; avParameter Section
+; Created by the Assura UI
+;----------------------------------------------------------------------------
+
+avParameters(
+  ?inputLayout ( "df2" "sumitfpga" )
+  ?cellName "inv"
+  ?viewName "layout"
+  ?rulesFile "/home/user/PDKfiles/scl_pdk/design_kit/drclvs_rsf/DRC.header"
+  ?set ("drc?")
+  ?avrpt t
+)
